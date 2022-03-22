@@ -36,5 +36,10 @@ def main_menu():
         for event in pygame.event.get():
             if event.type == QUIT:
                 quit()
-            elif event.type == KEYDOWN
+            elif event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    Menu()
+            if event.type == MOUSEBUTTONDOWN:
+                if difficulty[0].collidepoint(pygame.mouse.get_pos()):
+                    
 
