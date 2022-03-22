@@ -29,3 +29,12 @@ Play_Again_Button = pygame.transform.scale(Images/"Play_Again.jpg", (100,100))
 def main_menu():
     while True:
         screen.fill(Black)
+        difficulty = []
+        difficulty.append(pygame.Rect(5,450,240,100))
+        difficulty.append(pygame.Rect(255,450,240,100))
+        difficulty.append(pygame.Rect(505,450,240,100))
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                quit()
+            elif event.type == KEYDOWN
+
