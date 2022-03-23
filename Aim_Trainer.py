@@ -3,7 +3,6 @@ import random
 import sys
 import os
 import math
-from pygame.locals import *
 
 pygame.init()
 
@@ -23,9 +22,9 @@ Green = (0,255,0)
 Font = pygame.font.SysFont("Bangers", 50)
 
 #Initialize Images
-Aim_Target = pygame.transform.scale(Images/"Target.png", (50,50))
-Play_Button = pygame.transform.scale(Images/"Play.png", (100,100))
-Play_Again_Button = pygame.transform.scale(Images/"Play_Again.jpg", (100,100))
+Aim_Target = pygame.transform.scale("Images/Target.png", (50,50))
+Play_Button = pygame.transform.scale("Images/Play.png", (100,100))
+Play_Again_Button = pygame.transform.scale("Images/Play_Again.jpg", (100,100))
 
 #Initialize Time
 Clock = pygame.time.clock()
@@ -43,10 +42,10 @@ def main_menu():
         for event in pygame.event.get():
             if event.type == quit:
                 quit()
-            elif event.type == KEY_DOWN:
-                if event.key == K_ESCAPE:
+            elif event.type == pygame.KEY_DOWN:
+                if event.key == pygame.K_ESCAPE:
                     main_menu()
-            elif event.type == MOUSEBUTTONDOWN:
+            elif event.type == pygame.MOUSEBUTTONDOWN:
                 if difficulty[0].collidepoint(pygame.mouse.get_pos()):
                     game("Easy")
                 if difficulty[1].collidepoint(pygame.mouse.get_pos()):
@@ -54,7 +53,7 @@ def main_menu():
                 if difficulty[2].collidepoint(pygame.mouse.get_pos()):
                     game("Hard")
         for r in difficulty:
-            pygame.draw.rect(screen, Red, rect)
+            pygame.draw.rect(screen, Red, pygame.rect)
         Txt("Difficulty", screen, 90, 150, pygame.font.SysFont("Bangers", 112), color)
         Txt("Easy", screen, 85, 485, Font, Black)
         Txt("Medium", screen, 315, 485, Font, Black)
