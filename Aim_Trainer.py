@@ -1,6 +1,3 @@
-from cmath import rect
-from curses import KEY_DOWN
-from turtle import color
 import pygame
 import random
 import sys
