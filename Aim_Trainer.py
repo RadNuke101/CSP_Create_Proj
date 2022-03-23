@@ -29,13 +29,13 @@ Play_Again_Button = pygame.transform.scale("Images/Play_Again.jpg", (100,100))
 #Initialize Time
 Clock = pygame.time.clock()
 
-
+#Main Menu - Can select difficulty, exit, pause
 def main_menu():
     color = Blue
     time = 0
     while True:
         screen.fill(Black)
-        difficulty = []
+        difficulty = [] #Create a list
         difficulty.append(pygame.Rect(5,450,240,100))
         difficulty.append(pygame.Rect(255,450,240,100))
         difficulty.append(pygame.Rect(505,450,240,100))
@@ -57,7 +57,7 @@ def main_menu():
         Txt("Difficulty", screen, 90, 150, pygame.font.SysFont("Bangers", 112), color)
         Txt("Easy", screen, 85, 485, Font, Black)
         Txt("Medium", screen, 315, 485, Font, Black)
-        Txt("Hard", 580, 485, Font, Black)
+        Txt("Hard", screen, 580, 485, Font, Black)
         Clock.tick(50)
         time += 1
         if time % 100 == 0:
@@ -66,11 +66,26 @@ def main_menu():
             color = Red
         pygame.display.update()
 
-def Txt():
+#Draw text on screen
+def Txt(txt, cover, x, y, font = Font, color = Green):
     pass
 
-def game():
+#Code for different difficulties 
+def difficulty_lvl(difficulty):
     pass
+
+#Change sensitivity
+def sensitivity():
+    pass
+
+#Game over tab
+def game_over(shots, hits, difficulty, score):
+    pass
+
+#Aim Trainer code
+def game(difficulty):
+    pass
+
 
 
 
