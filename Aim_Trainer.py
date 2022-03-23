@@ -1,3 +1,6 @@
+from cmath import rect
+from curses import KEY_DOWN
+from turtle import color
 import pygame
 import random
 import sys
@@ -10,6 +13,7 @@ pygame.init()
 #Initialize Canvas/Window
 CanvasW = 1000
 CanvasH = 1000
+screen = pygame.display.set_mode((CanvasW,CanvasH))
 
 #Initialize Colors
 Black = (0,0,0)
@@ -26,7 +30,13 @@ Aim_Target = pygame.transform.scale(Images/"Target.png", (50,50))
 Play_Button = pygame.transform.scale(Images/"Play.png", (100,100))
 Play_Again_Button = pygame.transform.scale(Images/"Play_Again.jpg", (100,100))
 
+#Initialize Time
+Clock = pygame.time.clock()
+
+
 def main_menu():
+    color = Blue
+    time = 0
     while True:
         screen.fill(Black)
         difficulty = []
@@ -34,12 +44,38 @@ def main_menu():
         difficulty.append(pygame.Rect(255,450,240,100))
         difficulty.append(pygame.Rect(505,450,240,100))
         for event in pygame.event.get():
-            if event.type == QUIT:
+            if event.type == quit:
                 quit()
-            elif event.type == KEYDOWN:
+            elif event.type == KEY_DOWN:
                 if event.key == K_ESCAPE:
-                    Menu()
-            if event.type == MOUSEBUTTONDOWN:
+                    main_menu()
+            elif event.type == MOUSEBUTTONDOWN:
                 if difficulty[0].collidepoint(pygame.mouse.get_pos()):
-                    
+                    game("Easy")
+                if difficulty[1].collidepoint(pygame.mouse.get_pos()):
+                    game("Medium")
+                if difficulty[2].collidepoint(pygame.mouse.get_pos()):
+                    game("Hard")
+        for r in difficulty:
+            pygame.draw.rect(screen, Red, rect)
+        Txt("Difficulty", screen, 90, 150, pygame.font.SysFont("Bangers", 112), color)
+        Txt("Easy", screen, 85, 485, Font, Black)
+        Txt("Medium", screen, 315, 485, Font, Black)
+        Txt("Hard", 580, 485, Font, Black)
+        Clock.tick(50)
+        time += 1
+        if time % 100 == 0:
+            color = Blue
+        elif time % 50 == 0:
+            color = Red
+        pygame.display.update()
+
+def Txt():
+    pass
+
+def game():
+    pass
+
+
+
 
