@@ -2,7 +2,8 @@ import pygame
 import random
 import sys
 import os
-import math
+from pygame.locals import *
+import math 
 
 pygame.init()
 
@@ -21,24 +22,31 @@ Green = (0,255,0)
 #Initialize Font
 Font = pygame.font.SysFont("Bangers", 50)
 
+#Initialize Caption
+pygame.display.set_caption("Aim Trainer")
+
 #Initialize Images
-Aim_Target = pygame.transform.scale("Images/Target.png", (50,50))
-Play_Button = pygame.transform.scale("Images/Play.png", (100,100))
-Play_Again_Button = pygame.transform.scale("Images/Play_Again.jpg", (100,100))
+T = pygame.image.load("Images/Target.png")
+Aim_Target = pygame.transform.scale(T, (50, 50))
+A = pygame.image.load("Images/Play.png")
+Play_Button = pygame.transform.scale(A, (100,100))
+B = pygame.image.load("Images/Play_Again.jpg")
+Play_Again_Button = pygame.transform.scale(B, (100,100))
 
 #Initialize Time
-Clock = pygame.time.clock()
+Clock = pygame.time.Clock()
 
 #Main Menu - Can select difficulty, exit, pause
 def main_menu():
-    color = Blue
+    color1 = White
+    color2 = Red
     time = 0
     while True:
         screen.fill(Black)
         difficulty = [] #Create a list
-        difficulty.append(pygame.Rect(5,450,240,100))
-        difficulty.append(pygame.Rect(255,450,240,100))
-        difficulty.append(pygame.Rect(505,450,240,100))
+        difficulty.append(pygame.Rect(5,450,250,125))
+        difficulty.append(pygame.Rect(255,450,250,125))
+        difficulty.append(pygame.Rect(505,450,250,125))
         for event in pygame.event.get():
             if event.type == quit:
                 quit()
@@ -52,18 +60,21 @@ def main_menu():
                     game("Medium")
                 if difficulty[2].collidepoint(pygame.mouse.get_pos()):
                     game("Hard")
-        for r in difficulty:
+        for i in difficulty:
             pygame.draw.rect(screen, Red, pygame.rect)
-        Txt("Difficulty", screen, 90, 150, pygame.font.SysFont("Bangers", 112), color)
+        Txt("Aim Trainer", screen, 90, 150, pygame.font.SysFont("Bangers", 112), color1)
+        Txt("Choose a Difficulty", screen, 90, 300, pygame.font.SysFont("Bangers", 100), color2)
         Txt("Easy", screen, 85, 485, Font, Black)
         Txt("Medium", screen, 315, 485, Font, Black)
         Txt("Hard", screen, 580, 485, Font, Black)
         Clock.tick(50)
         time += 1
         if time % 100 == 0:
-            color = Blue
+            color1 = Red
+            color2 = White
         elif time % 50 == 0:
-            color = Red
+            color1 = White
+            color2 = Red
         pygame.display.update()
 
 #Draw text on screen
