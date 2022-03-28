@@ -78,7 +78,7 @@ def main_menu():
         pygame.display.update()
 
 #Draw text on screen
-def Txt(txt, cover, x, y, font = Font, color = Green):
+def Txt(txt, surface, x, y, font = Font, color = Green):
     pass
 
 #Code for different difficulties 
