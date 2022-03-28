@@ -25,6 +25,10 @@ Font = pygame.font.SysFont("Bangers", 50)
 #Initialize Caption
 pygame.display.set_caption("Aim Trainer")
 
+#Initialize Icon
+I = pygame.image.load("Images/Icon.jpg")
+pygame.display.set_icon(I)
+
 #Initialize Images
 T = pygame.image.load("Images/Target.png")
 Aim_Target = pygame.transform.scale(T, (50, 50))
@@ -78,8 +82,8 @@ def main_menu():
         pygame.display.update()
 
 #Draw text on screen
-def Txt(txt, surface, x, y, font = Font, color = Green):
-    pass
+def draw(txt, surface, x, y, font = Font, color = Green):
+    txtRect = Font.render(txt, 1, color).getRect()
 
 #Code for different difficulties 
 def difficulty_lvl(difficulty):
@@ -88,6 +92,7 @@ def difficulty_lvl(difficulty):
 #Change sensitivity
 def sensitivity():
     pass
+
 
 #Game over tab
 def game_over(shots, hits, difficulty, score):
