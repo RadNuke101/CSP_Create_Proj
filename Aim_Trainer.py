@@ -1,4 +1,3 @@
-from operator import truediv
 import pygame
 import random
 import sys
@@ -6,6 +5,7 @@ import os
 from pygame.locals import *
 import math 
 
+pygame.font.init()
 pygame.init()
 
 #Initialize Canvas/Window
@@ -21,7 +21,11 @@ White = (255,255,255)
 Green = (0,255,0)
 
 #Initialize Font
-Font = pygame.font.SysFont("Retro.ttf", 50)
+font = pygame.font.Font('Lobster.ttf', 32)
+txt = font.render('Aim Trainer', True, Red)
+textRect = txt.get_rect()
+textRect.center = (CanvasW // 2, CanvasH // 2)
+
 
 #Initialize Caption
 pygame.display.set_caption("Aim Trainer")
@@ -45,33 +49,36 @@ Clock = pygame.time.Clock()
 def intro():
     pass
 
-#Main Menu - Can select difficulty, exit, pause
+#Quit game
+def quit():
+    pygame.quit()
+    sys.exit()
+
+#Draw text on screen
+def draw(text, surface, x, y, Font, color):
+    textObject = Font.render(text, 1, color)
+    textRect = textObject.get_rect()
+    textRect.topleft = (x,y)
+    surface.blit(textObject, textRect)
+
+
+#Main Menu - Exit, pause
 def main_menu():
-    selected = "Start"
     color1 = White
     color2 = Red
     time = 0
     while True:
         screen.fill(Black)
         for event in pygame.event.get():
-            if event.type == quit:
-                pygame.quit()
+            if event.type == pygame.QUIT:
                 quit()
-            elif event.type == pygame.KEY_DOWN:
-                if event.key == pygame.K_UP:
-                    selected = "Start"
-                elif event.key == pygame.K_ESCAPE:
-                    main_menu()
-                elif event.key == pygame.K_DOWN:
-                    selected = "Quit"
-                if event.key == pygame.K_RETURN:
-                    if selected == "Start":
-                        game()
-                    elif selected == "Quit":
-                        pygame.quit()
-                        quit()
-        draw("Aim Trainer", screen, 90, 150, pygame.font.SysFont(Font, 112), color1)
-        draw("Start", screen, 90, 300, pygame.font.SysFont(Font, 100), color2)
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    quit()
+        
+        screen.blit(txt, textRect)
+        #draw("Aim Trainer", screen, 90, 150, 100, color1)
+        #draw("Start", screen, 90, 300, 100, color2)
         Clock.tick(50)
         time += 1
         if time % 100 == 0:
@@ -82,10 +89,7 @@ def main_menu():
             color2 = Red
         pygame.display.update()
 
-#Draw text on screen
-def draw(txt, Font):
-    textSurface = Font.render(txt, True, Black)
-    return textSurface, textSurface.get_rect()
+main_menu()
 
 #Code for different difficulties 
 def difficulty_lvl(difficulty):
