@@ -1,3 +1,19 @@
+#############################################################################################################
+#                                                --AIM_TRAINER--                                            #
+ 
+#                                             Author: Pranav Putta                                          #
+ 
+#                                 Description: Practice your aim to improve gameplay                        #
+ 
+#                                                                                                           #
+ 
+#                                                                                                           #
+ 
+#                                                                                                           #
+ 
+#                                                                                                           #
+#############################################################################################################
+
 import pygame
 import random
 import sys
@@ -20,12 +36,9 @@ Blue = (0,0,255)
 White = (255,255,255)
 Green = (0,255,0)
 
-#Initialize Font
-font = pygame.font.Font('Lobster.ttf', 32)
-txt = font.render('Aim Trainer', True, Red)
-textRect = txt.get_rect()
-textRect.center = (CanvasW // 2, CanvasH // 2)
-
+#Initialize Fonts
+Font_TXT = pygame.font.Font("Fonts/Blazed.ttf", 75)
+Font_TITLE = pygame.font.Font("Fonts/Blazed.ttf", 100)
 
 #Initialize Caption
 pygame.display.set_caption("Aim Trainer")
@@ -45,22 +58,20 @@ Play_Again_Button = pygame.transform.scale(B, (100,100))
 #Initialize Time
 Clock = pygame.time.Clock()
 
-#Loading Screen
-def intro():
-    pass
-
 #Quit game
 def quit():
     pygame.quit()
     sys.exit()
 
 #Draw text on screen
-def draw(text, surface, x, y, Font, color):
-    textObject = Font.render(text, 1, color)
+def draw(text, surface, x, y, font, color = Red):
+    textObject = font.render(text, 1, color)
     textRect = textObject.get_rect()
     textRect.topleft = (x,y)
     surface.blit(textObject, textRect)
 
+#Store position of mouse
+mouse = pygame.mouse.get_pos()
 
 #Main Menu - Exit, pause
 def main_menu():
@@ -68,17 +79,26 @@ def main_menu():
     color2 = Red
     time = 0
     while True:
+        Buttons = []
         screen.fill(Black)
+        Buttons.append(pygame.Rect(350, 400, 240, 100))
+        Buttons.append(pygame.Rect(350, 600, 240, 100))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     quit()
-        
-        screen.blit(txt, textRect)
-        #draw("Aim Trainer", screen, 90, 150, 100, color1)
-        #draw("Start", screen, 90, 300, 100, color2)
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if Buttons[0].collidepoint(pygame.mouse.get_pos()):
+                      game()
+                if Buttons[1].collidepoint(pygame.mouse.get_pos()):
+                    quit()
+        for btn in Buttons:
+            pygame.draw.rect(screen, Black, btn)
+        draw("Aim Trainer", screen, 75, 150, Font_TITLE, color1)
+        draw("Start", screen, 350, 400, Font_TXT, color2)
+        draw("Exit", screen, 350, 600, Font_TXT, color2)
         Clock.tick(50)
         time += 1
         if time % 100 == 0:
@@ -91,10 +111,6 @@ def main_menu():
 
 main_menu()
 
-#Code for different difficulties 
-def difficulty_lvl(difficulty):
-    pass
-
 #Change sensitivity
 def sensitivity():
     pass
@@ -103,9 +119,28 @@ def sensitivity():
 def game_over(shots, hits, difficulty, score):
     pass
 
+#Targets
+def targets():
+    enemyImg = []
+    enemies_Num = 10
+    for enemy in range (enemies_Num):
+        enemyImg.append(pygame.image.load("Images/Target.png"))
+
+#Score tracker
+def score(x, y):
+    score_val = 0
+    score = Font_TXT.render("SCORE : " + str(score_val), True, (255, 255, 255))
+    screen.blit(score, (x, y))
+
+def scope(x, y):
+    screen.blit("Images/Aim.png", (x, y))
+
+
 #Aim Trainer code
-def game(difficulty):
+def game():
     pass
+
+    
 
 
 
