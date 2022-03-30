@@ -39,6 +39,7 @@ Green = (0,255,0)
 #Initialize Fonts
 Font_TXT = pygame.font.Font("Fonts/Blazed.ttf", 75)
 Font_TITLE = pygame.font.Font("Fonts/Blazed.ttf", 100)
+Game_TXT = pygame.font.Font("Fonts/raidercrusader.ttf", 50)
 
 #Initialize Caption
 pygame.display.set_caption("Aim Trainer")
@@ -91,7 +92,7 @@ def main_menu():
                     quit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if Buttons[0].collidepoint(pygame.mouse.get_pos()):
-                      game()
+                    game()
                 if Buttons[1].collidepoint(pygame.mouse.get_pos()):
                     quit()
         for btn in Buttons:
@@ -110,6 +111,25 @@ def main_menu():
         pygame.display.update()
 
 main_menu()
+
+#Pause Game
+def pause():
+    loop = 1
+    draw("PAUSED", screen, 500, 150, Game_TXT, Red)
+    draw("Press Space to continue", 500, 250, Game_TXT, Blue)
+    while loop:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                loop = 0
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    loop = 0
+                if event.key == pygame.K_SPACE:
+                    screen.fill((0, 0, 0))
+                    loop = 0
+        pygame.display.update()
+        # screen.fill((0, 0, 0))
+        Clock.tick(60)
 
 #Change sensitivity
 def sensitivity():
@@ -138,7 +158,9 @@ def scope(x, y):
 
 #Aim Trainer code
 def game():
-    pass
+    screen.fill(Black)
+    screen.blit(T, (0, 0))
+
 
     
 
