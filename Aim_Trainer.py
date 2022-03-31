@@ -36,6 +36,7 @@ Blue = (0,0,255)
 White = (255,255,255)
 Green = (0,255,0)
 
+
 #Initialize Fonts
 Font_TXT = pygame.font.Font("Fonts/Blazed.ttf", 75)
 Font_TITLE = pygame.font.Font("Fonts/Blazed.ttf", 100)
@@ -74,6 +75,20 @@ def draw(text, surface, x, y, font, color = Red):
 #Store position of mouse
 mouse = pygame.mouse.get_pos()
 
+#Aim Trainer code
+def game():
+    while True:
+        screen.fill(Black)
+        screen.blit(Aim_Target, (50, 600))
+        screen.blit(Aim_Target, (400, 366))
+        screen.blit(Aim_Target, (100, 200))
+        screen.blit(Aim_Target, (600, 300))
+        screen.blit(Aim_Target, (789, 921))
+        screen.blit(Aim_Target, (425, 800))
+        screen.blit(Aim_Target, (900, 400))
+        screen.blit(Aim_Target, (300, 500))
+
+
 #Main Menu - Exit, pause
 def main_menu():
     color1 = White
@@ -111,6 +126,7 @@ def main_menu():
         pygame.display.update()
 
 main_menu()
+
 
 #Pause Game
 def pause():
@@ -156,10 +172,6 @@ def scope(x, y):
     screen.blit("Images/Aim.png", (x, y))
 
 
-#Aim Trainer code
-def game():
-    screen.fill(Black)
-    screen.blit(T, (0, 0))
 
 
     
