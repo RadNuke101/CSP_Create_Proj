@@ -57,7 +57,7 @@ Play_Button = pygame.transform.scale(A, (100,100))
 B = pygame.image.load("Images/Play_Again.jpg")
 Play_Again_Button = pygame.transform.scale(B, (100,100))
 Aim = pygame.image.load("Images/Aim.png")
-Aim_Scope = pygame.transform.scale(Aim, (70,70))
+Aim_Scope = pygame.transform.scale(Aim, (500,500))
 
 
 #Initialize Time
@@ -80,6 +80,8 @@ mouse = pygame.mouse.get_pos()
 
 #Aim Trainer code
 def game():
+    MX = (CanvasW / 2)
+    MY = (CanvasH  / 2)
     pygame.mouse.set_visible(False)
     while True:
         screen.fill(Black)
@@ -91,7 +93,6 @@ def game():
         screen.blit(Aim_Target, (425, 800))
         screen.blit(Aim_Target, (900, 400))
         screen.blit(Aim_Target, (300, 500))
-        screen.blit(Aim_Scope, (mouse)) 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
@@ -121,6 +122,7 @@ def main_menu():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if Buttons[0].collidepoint(pygame.mouse.get_pos()):
                     game()
+                    pause()
                 if Buttons[1].collidepoint(pygame.mouse.get_pos()):
                     quit()
         for btn in Buttons:
@@ -138,21 +140,16 @@ def main_menu():
             color2 = Red
         pygame.display.update()
 
-main_menu()
-
-
 #Pause Game
 def pause():
-    loop = 1
-    draw("PAUSED", screen, 500, 150, Game_TXT, Red)
-    draw("Press Space to continue", 500, 250, Game_TXT, Blue)
-    while loop:
+    paused = True
+    while paused:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                loop = 0
+                quit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    loop = 0
+                if event.key == pygame.K_SPACE:
+                    paused = False
                 if event.key == pygame.K_SPACE:
                     screen.fill((0, 0, 0))
                     loop = 0
@@ -184,7 +181,7 @@ def score(x, y):
 def scope(x, y):
     screen.blit("Images/Aim.png", (x, y))
 
-
+main_menu()
 
 
     
