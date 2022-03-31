@@ -56,6 +56,9 @@ A = pygame.image.load("Images/Play.png")
 Play_Button = pygame.transform.scale(A, (100,100))
 B = pygame.image.load("Images/Play_Again.jpg")
 Play_Again_Button = pygame.transform.scale(B, (100,100))
+Aim = pygame.image.load("Images/Aim.png")
+Aim_Scope = pygame.transform.scale(Aim, (70,70))
+
 
 #Initialize Time
 Clock = pygame.time.Clock()
@@ -77,6 +80,7 @@ mouse = pygame.mouse.get_pos()
 
 #Aim Trainer code
 def game():
+    pygame.mouse.set_visible(False)
     while True:
         screen.fill(Black)
         screen.blit(Aim_Target, (50, 600))
@@ -87,6 +91,14 @@ def game():
         screen.blit(Aim_Target, (425, 800))
         screen.blit(Aim_Target, (900, 400))
         screen.blit(Aim_Target, (300, 500))
+        screen.blit(Aim_Scope, (mouse)) 
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
+            if event.type == pygame.MOUSEMOTION:
+                MX = event.pos[0]
+                MY = event.pos[1]
+        screen.blit(Aim_Scope, (MX, MY))    
         pygame.display.update()
 
 
