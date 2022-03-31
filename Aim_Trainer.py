@@ -87,6 +87,7 @@ def game():
         screen.blit(Aim_Target, (425, 800))
         screen.blit(Aim_Target, (900, 400))
         screen.blit(Aim_Target, (300, 500))
+        pygame.display.update()
 
 
 #Main Menu - Exit, pause
