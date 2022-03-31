@@ -14,12 +14,8 @@
 #                                                                                                           #
 #############################################################################################################
 
-import pygame
-import random
-import sys
-import os
+import pygame, random, sys, os, math, random
 from pygame.locals import *
-import math 
 
 pygame.font.init()
 pygame.init()
@@ -40,7 +36,7 @@ Green = (0,255,0)
 #Initialize Fonts
 Font_TXT = pygame.font.Font("Fonts/Blazed.ttf", 75)
 Font_TITLE = pygame.font.Font("Fonts/Blazed.ttf", 100)
-Game_TXT = pygame.font.Font("Fonts/raidercrusader.ttf", 50)
+Game_TXT = pygame.font.Font("Fonts/raidercrusader.ttf", 75)
 
 #Initialize Caption
 pygame.display.set_caption("Aim Trainer")
@@ -85,9 +81,8 @@ def pause():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     paused = False
-                elif event.key == pygame.K_SPACE:
         screen.fill(White)
-        draw("Press Space to Resume", screen, 350, 500, Font_TXT, Red)
+        draw("Press Space to Resume", screen, 120, 350, Game_TXT, Red)
         pygame.display.update()
 
 #Store position of mouse
@@ -97,9 +92,18 @@ mouse = pygame.mouse.get_pos()
 def game():
     MX = (CanvasW / 2)
     MY = (CanvasH  / 2)
+    x = 900
+    y = 400
     pygame.mouse.set_visible(False)
     while True:
         screen.fill(Black)
+        #for x in range(0, 10):
+            #Targets = []
+            #for x in range(1,1000):
+                #x_coord = random()
+            #for y in range(1,1000):
+                #y_coord = random()
+            #screen.blit(Aim_Target, (x, y))
         screen.blit(Aim_Target, (50, 600))
         screen.blit(Aim_Target, (400, 366))
         screen.blit(Aim_Target, (100, 200))
@@ -111,6 +115,10 @@ def game():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
+            #if event.type == pygame.MOUSEBUTTONDOWN:
+                #x, y = event.pos
+                #if Aim_Target.get_rect().collidepoint(x, y):
+                    #pygame.draw.circle(screen, Black, (x, y), 250, 500)
             if event.type == pygame.MOUSEMOTION:
                 MX = event.pos[0]
                 MY = event.pos[1]
