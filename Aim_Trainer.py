@@ -75,6 +75,21 @@ def draw(text, surface, x, y, font, color = Red):
     textRect.topleft = (x,y)
     surface.blit(textObject, textRect)
 
+#Pause Game
+def pause():
+    paused = True
+    while paused:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    paused = False
+                elif event.key == pygame.K_SPACE:
+        screen.fill(White)
+        draw("Press Space to Resume", screen, 350, 500, Font_TXT, Red)
+        pygame.display.update()
+
 #Store position of mouse
 mouse = pygame.mouse.get_pos()
 
@@ -99,6 +114,9 @@ def game():
             if event.type == pygame.MOUSEMOTION:
                 MX = event.pos[0]
                 MY = event.pos[1]
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    pause()
         screen.blit(Aim_Scope, (MX, MY))    
         pygame.display.update()
 
@@ -139,23 +157,6 @@ def main_menu():
             color1 = White
             color2 = Red
         pygame.display.update()
-
-#Pause Game
-def pause():
-    paused = True
-    while paused:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    paused = False
-                if event.key == pygame.K_SPACE:
-                    screen.fill((0, 0, 0))
-                    loop = 0
-        pygame.display.update()
-        # screen.fill((0, 0, 0))
-        Clock.tick(60)
 
 #Change sensitivity
 def sensitivity():
