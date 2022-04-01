@@ -86,45 +86,47 @@ def pause():
         pygame.display.update()
 
 #Store position of mouse
-mouse = pygame.mouse.get_pos()
+Mice = pygame.mouse.get_pos()
 
 #Aim Trainer code
 def game():
     MX = (CanvasW / 2) #0
     MY = (CanvasH / 2) #0
-    #x = 900
-    #y = 400
     pygame.mouse.set_visible(False)
     while True:
-        screen.fill(Black)
-        #for x in range(0, 10):
-            #Targets = []
-            #for x in range(1,1000):
-                #x_coord = random()
-            #for y in range(1,1000):[[[[[[[p]]]]]]]
-                #y_coord = random()
-            #screen.blit(Aim_Target, (x, y))
-        screen.blit(Aim_Target, (50, 600))
-        screen.blit(Aim_Target, (400, 366))
-        screen.blit(Aim_Target, (100, 200))
-        screen.blit(Aim_Target, (600, 300))
-        screen.blit(Aim_Target, (789, 921))
-        screen.blit(Aim_Target, (425, 800))
-        screen.blit(Aim_Target, (900, 400))
-        screen.blit(Aim_Target, (300, 500))
+        #screen.fill(Black)
+        #screen.blit(Aim_Target, (50, 600))
+        #screen.blit(Aim_Target, (400, 366))
+        #screen.blit(Aim_Target, (100, 200))
+        #screen.blit(Aim_Target, (600, 300))
+        #screen.blit(Aim_Target, (789, 921))
+        #screen.blit(Aim_Target, (425, 800))
+        #screen.blit(Aim_Target, (900, 400))
+        #screen.blit(Aim_Target, (300, 500))
+        Targets = []
+        Targets.append((50, 600))
+        Targets.append((400, 366))
+        Targets.append((100, 200))
+        Targets.append((600, 300))
+        Targets.append((789, 921))
+        Targets.append((425, 800))
+        Targets.append((900, 400))
+        Targets.append((300, 500))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
-            #if event.type == pygame.MOUSEBUTTONDOWN:
-                #x, y = event.pos
-                #if Aim_Target.get_rect().collidepoint(x, y):
-                    #pygame.draw.circle(screen, Black, (x, y), 250, 500)
             if event.type == pygame.MOUSEMOTION:
                 MX = event.pos[0]
                 MY = event.pos[1]
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                for x in range(0,8):
+                    if Targets[x].collidepoint(pygame.mouse.get_pos()):
+                        Targets.pop(x)
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     pause()
+        for t in Targets:
+            screen.blit(Aim_Target, t)
         screen.blit(Aim_Scope, (MX, MY))    
         pygame.display.update()
 
