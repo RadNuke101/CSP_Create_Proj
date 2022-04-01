@@ -90,10 +90,10 @@ mouse = pygame.mouse.get_pos()
 
 #Aim Trainer code
 def game():
-    MX = (CanvasW / 2)
-    MY = (CanvasH  / 2)
-    x = 900
-    y = 400
+    MX = (CanvasW / 2) #0
+    MY = (CanvasH / 2) #0
+    #x = 900
+    #y = 400
     pygame.mouse.set_visible(False)
     while True:
         screen.fill(Black)
@@ -101,7 +101,7 @@ def game():
             #Targets = []
             #for x in range(1,1000):
                 #x_coord = random()
-            #for y in range(1,1000):
+            #for y in range(1,1000):[[[[[[[p]]]]]]]
                 #y_coord = random()
             #screen.blit(Aim_Target, (x, y))
         screen.blit(Aim_Target, (50, 600))
