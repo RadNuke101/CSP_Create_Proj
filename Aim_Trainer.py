@@ -94,7 +94,7 @@ def game():
     MY = (CanvasH / 2) #0
     pygame.mouse.set_visible(False)
     while True:
-        #screen.fill(Black)
+        screen.fill(Black)
         #screen.blit(Aim_Target, (50, 600))
         #screen.blit(Aim_Target, (400, 366))
         #screen.blit(Aim_Target, (100, 200))
@@ -119,15 +119,16 @@ def game():
                 MX = event.pos[0]
                 MY = event.pos[1]
             if event.type == pygame.MOUSEBUTTONDOWN:
-                for x in range(0,8):
-                    if Targets[x].collidepoint(pygame.mouse.get_pos()):
-                        Targets.pop(x)
+                for x in Targets:
+                    if (MX + 50 or MX - 50, MY + 50 or MY - 50) == (x):
+                        draw("YES", screen, 350, 600, Font_TXT, Red)
+                        #Targets.remove(x)
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     pause()
         for t in Targets:
             screen.blit(Aim_Target, t)
-        screen.blit(Aim_Scope, (MX, MY))    
+        screen.blit(Aim_Scope, (MX, MY)) 
         pygame.display.update()
 
 
@@ -168,29 +169,15 @@ def main_menu():
             color2 = Red
         pygame.display.update()
 
-#Change sensitivity
-def sensitivity():
-    pass
-
 #Game over tab
 def game_over(shots, hits, difficulty, score):
     pass
-
-#Targets
-def targets():
-    enemyImg = []
-    enemies_Num = 10
-    for enemy in range (enemies_Num):
-        enemyImg.append(pygame.image.load("Images/Target.png"))
 
 #Score tracker
 def score(x, y):
     score_val = 0
     score = Font_TXT.render("SCORE : " + str(score_val), True, (255, 255, 255))
     screen.blit(score, (x, y))
-
-def scope(x, y):
-    screen.blit("Images/Aim.png", (x, y))
 
 main_menu()
 
