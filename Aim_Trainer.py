@@ -112,23 +112,37 @@ def game():
         Targets.append((425, 800))
         Targets.append((900, 400))
         Targets.append((300, 500))
+        Target_rect = []
+        Target_rect.append(pygame.Rect(50,600,50,50))
+        Target_rect.append(pygame.Rect(400,366,50,50))
+        Target_rect.append(pygame.Rect(100,200,50,50))
+        Target_rect.append(pygame.Rect(600,300,50,50))
+        Target_rect.append(pygame.Rect(789,921,50,50))
+        Target_rect.append(pygame.Rect(425,800,50,50))
+        Target_rect.append(pygame.Rect(900,400,50,50))
+        Target_rect.append(pygame.Rect(300,500,50,50))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
             if event.type == pygame.MOUSEMOTION:
                 MX = event.pos[0]
                 MY = event.pos[1]
+                #pygame.draw.rect(screen, Green, (MX, MY, 40, 40)) 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                for x in Targets:
-                    if (MX + 50 or MX - 50, MY + 50 or MY - 50) == (x):
-                        draw("YES", screen, 350, 600, Font_TXT, Red)
-                        #Targets.remove(x)
+                for x in range(0,7):
+                    if Target_rect[x].colliderect(Cursor):            
+                        del Targets[x]
+                        del Target_rect[x]
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     pause()
         for t in Targets:
             screen.blit(Aim_Target, t)
-        screen.blit(Aim_Scope, (MX, MY)) 
+        for r in Target_rect:
+            pygame.draw.rect(screen, (255,255,255), r)
+        screen.blit(Aim_Scope, (MX - 230, MY - 230))
+        Cursor = pygame.Rect(MX, MY, 40, 40)
+        pygame.draw.rect(screen, Green, Cursor) 
         pygame.display.update()
 
 
