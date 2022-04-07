@@ -99,8 +99,8 @@ def game_over(score):
             pygame.draw.rect(screen, Black, btn)
         draw("GAME OVER", screen, 300, 150, Game_OVER_TXT, Red)
         draw("Score:" + str(score), screen, 425, 250, Score_TXT, White)
-        draw("Retry", screen, 350, 500, Font_TXT, Red)
-        draw("Exit", screen, 350, 700, Font_TXT, White)
+        draw("Retry", screen, 350, 400, Font_TXT, Red)
+        draw("Exit", screen, 350, 600, Font_TXT, White)
         pygame.display.update()
 
 #Pause Game
@@ -125,37 +125,29 @@ def game():
     MX = (CanvasW / 2) #0
     MY = (CanvasH / 2) #0
     score = 0
-    counter, text = 10, '10'.rjust(3)
+    counter, text = 15, "15".rjust(3)
     pygame.time.set_timer(pygame.USEREVENT, 1000)
     pygame.mouse.set_visible(False)
+    Targets = []
+    Targets.append((50, 600))
+    Targets.append((400, 366))
+    Targets.append((100, 200))
+    Targets.append((600, 300))
+    Targets.append((789, 921))
+    Targets.append((425, 800))
+    Targets.append((900, 400))
+    Targets.append((300, 500))
+    Target_rect = []
+    Target_rect.append(pygame.Rect(50,600,50,50))
+    Target_rect.append(pygame.Rect(400,366,50,50))
+    Target_rect.append(pygame.Rect(100,200,50,50))
+    Target_rect.append(pygame.Rect(600,300,50,50))
+    Target_rect.append(pygame.Rect(789,921,50,50))
+    Target_rect.append(pygame.Rect(425,800,50,50))
+    Target_rect.append(pygame.Rect(900,400,50,50))
+    Target_rect.append(pygame.Rect(300,500,50,50))
     while True:
         screen.fill(Black)
-        #screen.blit(Aim_Target, (50, 600))
-        #screen.blit(Aim_Target, (400, 366))
-        #screen.blit(Aim_Target, (100, 200))
-        #screen.blit(Aim_Target, (600, 300))
-        #screen.blit(Aim_Target, (789, 921))
-        #screen.blit(Aim_Target, (425, 800))
-        #screen.blit(Aim_Target, (900, 400))
-        #screen.blit(Aim_Target, (300, 500))
-        Targets = []
-        Targets.append((50, 600))
-        Targets.append((400, 366))
-        Targets.append((100, 200))
-        Targets.append((600, 300))
-        Targets.append((789, 921))
-        Targets.append((425, 800))
-        Targets.append((900, 400))
-        Targets.append((300, 500))
-        Target_rect = []
-        Target_rect.append(pygame.Rect(50,600,50,50))
-        Target_rect.append(pygame.Rect(400,366,50,50))
-        Target_rect.append(pygame.Rect(100,200,50,50))
-        Target_rect.append(pygame.Rect(600,300,50,50))
-        Target_rect.append(pygame.Rect(789,921,50,50))
-        Target_rect.append(pygame.Rect(425,800,50,50))
-        Target_rect.append(pygame.Rect(900,400,50,50))
-        Target_rect.append(pygame.Rect(300,500,50,50))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
@@ -163,9 +155,8 @@ def game():
                 MX = event.pos[0]
                 MY = event.pos[1]
             if event.type == pygame.MOUSEBUTTONDOWN:
-                for x in range(0,7):
+                for x in range(0, len(Target_rect)-1):
                     if Target_rect[x].collidepoint(pygame.mouse.get_pos()):   
-                        #draw("Exit", screen, 350, 600, Font_TXT, Red)
                         score = score + 1
                         del Targets[x]
                         del Target_rect[x]
