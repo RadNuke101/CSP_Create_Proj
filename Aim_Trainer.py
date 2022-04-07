@@ -37,6 +37,9 @@ Green = (0,255,0)
 Font_TXT = pygame.font.Font("Fonts/Blazed.ttf", 75)
 Font_TITLE = pygame.font.Font("Fonts/Blazed.ttf", 100)
 Game_TXT = pygame.font.Font("Fonts/raidercrusader.ttf", 75)
+Game_OVER_TXT = pygame.font.Font("Fonts/raidercrusader.ttf", 75)
+Score_TXT = pygame.font.Font("Fonts/raidercrusader.ttf", 50)
+
 
 #Initialize Caption
 pygame.display.set_caption("Aim Trainer")
@@ -71,6 +74,35 @@ def draw(text, surface, x, y, font, color = Red):
     textRect.topleft = (x,y)
     surface.blit(textObject, textRect)
 
+
+#Game over tab
+def game_over(score):
+    pygame.mouse.set_visible(True)
+    while True:
+        Buttons = []
+        Buttons.append(pygame.Rect(350, 400, 240, 100))
+        Buttons.append(pygame.Rect(350, 600, 240, 100))
+        screen.fill(Black)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    quit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if Buttons[0].collidepoint(pygame.mouse.get_pos()):
+                    game()
+                    pause()
+                if Buttons[1].collidepoint(pygame.mouse.get_pos()):
+                    quit()
+        for btn in Buttons:
+            pygame.draw.rect(screen, Black, btn)
+        draw("GAME OVER", screen, 300, 150, Game_OVER_TXT, Red)
+        draw("Score:" + str(score), screen, 425, 250, Score_TXT, White)
+        draw("Retry", screen, 350, 500, Font_TXT, Red)
+        draw("Exit", screen, 350, 700, Font_TXT, White)
+        pygame.display.update()
+
 #Pause Game
 def pause():
     paused = True
@@ -86,12 +118,15 @@ def pause():
         pygame.display.update()
 
 #Store position of mouse
-Mice = pygame.mouse.get_pos()
+Mouse = pygame.mouse.get_pos()
 
 #Aim Trainer code
 def game():
     MX = (CanvasW / 2) #0
     MY = (CanvasH / 2) #0
+    score = 0
+    counter, text = 10, '10'.rjust(3)
+    pygame.time.set_timer(pygame.USEREVENT, 1000)
     pygame.mouse.set_visible(False)
     while True:
         screen.fill(Black)
@@ -127,22 +162,31 @@ def game():
             if event.type == pygame.MOUSEMOTION:
                 MX = event.pos[0]
                 MY = event.pos[1]
-                #pygame.draw.rect(screen, Green, (MX, MY, 40, 40)) 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 for x in range(0,7):
-                    if Target_rect[x].colliderect(Cursor):            
+                    if Target_rect[x].collidepoint(pygame.mouse.get_pos()):   
+                        #draw("Exit", screen, 350, 600, Font_TXT, Red)
+                        score = score + 1
                         del Targets[x]
                         del Target_rect[x]
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     pause()
+            if event.type == pygame.USEREVENT:
+                counter = counter - 1
+                if counter > 0:
+                    text = str(counter).rjust(3)
+                else:
+                    game_over(score)
+        for r in Target_rect:
+            pygame.draw.rect(screen, Black, r)
         for t in Targets:
             screen.blit(Aim_Target, t)
-        for r in Target_rect:
-            pygame.draw.rect(screen, (255,255,255), r)
+        #Cursor = pygame.Rect(MX, MY, 40, 40)
+        #pygame.draw.rect(screen, Black, Cursor)
+        draw("Score: " + str(score), screen, 50, 50, Game_TXT, Red) 
+        draw("Time: " + text, screen, 650, 50, Game_TXT, Red)
         screen.blit(Aim_Scope, (MX - 230, MY - 230))
-        Cursor = pygame.Rect(MX, MY, 40, 40)
-        pygame.draw.rect(screen, Green, Cursor) 
         pygame.display.update()
 
 
@@ -182,16 +226,6 @@ def main_menu():
             color1 = White
             color2 = Red
         pygame.display.update()
-
-#Game over tab
-def game_over(shots, hits, difficulty, score):
-    pass
-
-#Score tracker
-def score(x, y):
-    score_val = 0
-    score = Font_TXT.render("SCORE : " + str(score_val), True, (255, 255, 255))
-    screen.blit(score, (x, y))
 
 main_menu()
 
