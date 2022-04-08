@@ -155,7 +155,7 @@ def game():
                 MX = event.pos[0]
                 MY = event.pos[1]
             if event.type == pygame.MOUSEBUTTONDOWN:
-                for x in range(0, len(Target_rect)-1):
+                for x in range(len(Target_rect)-1):
                     if Target_rect[x].collidepoint(pygame.mouse.get_pos()):   
                         score = score + 1
                         del Targets[x]
@@ -173,8 +173,8 @@ def game():
             pygame.draw.rect(screen, Black, r)
         for t in Targets:
             screen.blit(Aim_Target, t)
-        #Cursor = pygame.Rect(MX, MY, 40, 40)
-        #pygame.draw.rect(screen, Black, Cursor)
+        if len(Targets) == 0:
+            game_over(8)
         draw("Score: " + str(score), screen, 50, 50, Game_TXT, Red) 
         draw("Time: " + text, screen, 650, 50, Game_TXT, Red)
         screen.blit(Aim_Scope, (MX - 230, MY - 230))
