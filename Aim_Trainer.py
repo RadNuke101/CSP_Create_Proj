@@ -14,7 +14,7 @@
 #                                                                                                           #
 #############################################################################################################
 
-import pygame, random, sys, os, math, random
+import pygame, sys
 from pygame.locals import *
 
 pygame.font.init()
@@ -118,9 +118,6 @@ def pause():
         draw("Press Space to Resume", screen, 120, 350, Game_TXT, Red)
         pygame.display.update()
 
-#Store position of mouse
-Mouse = pygame.mouse.get_pos()
-
 #Aim Trainer code
 def game():
     MX = (CanvasW / 2)
@@ -131,6 +128,7 @@ def game():
     pygame.mouse.set_visible(False)
     Targets = []
     Targets.append((50, 200))
+    Targets.append((450, 200))
     Targets.append((400, 366))
     Targets.append((100, 400))
     Targets.append((600, 500))
@@ -143,6 +141,7 @@ def game():
     Targets.append((500, 500))
     Target_rect = []
     Target_rect.append(pygame.Rect(50,200,50,50))
+    Target_rect.append(pygame.Rect(450,200,50,50))
     Target_rect.append(pygame.Rect(400,366,50,50))
     Target_rect.append(pygame.Rect(100,400,50,50))
     Target_rect.append(pygame.Rect(600,500,50,50))
@@ -181,7 +180,7 @@ def game():
         for t in Targets:
             screen.blit(Aim_Target, t)
         if len(Targets) == 0:
-            game_over(11)
+            game_over(12)
         draw("Score: " + str(score), screen, 50, 50, Game_TXT, Red) 
         draw("Time: " + text, screen, 650, 50, Game_TXT, Red)
         screen.blit(Aim_Scope, (MX - 230, MY - 230))
