@@ -131,9 +131,7 @@ def game(difficulty):
         number_targets = 7
     if difficulty == "normal":
         number_targets = 14
-    if difficulty == "hard":
-
-        
+    if difficulty == "hard":   
         number_targets = 21
     for x in range(number_targets):
         x = random.randrange(50, 950, 66)
@@ -148,12 +146,13 @@ def game(difficulty):
             if event.type == pygame.MOUSEMOTION:
                 MX = event.pos[0]
                 MY = event.pos[1]
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                for x in range(-1, len(Targets)-1):
-                    if Target_rect[x].collidepoint(pygame.mouse.get_pos()):   
+            for i in Target_rect:
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if i.collidepoint(pygame.mouse.get_pos()):   
                         score = score + 1
-                        del Targets[x]
-                        del Target_rect[x]
+                        indx = Target_rect.index(i)
+                        Targets.pop(indx)
+                        Target_rect.pop(indx)
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     pause()
