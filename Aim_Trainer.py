@@ -14,7 +14,7 @@
 #                                                                                                           #
 #############################################################################################################
 
-import pygame, sys
+import pygame, sys, random
 from pygame.locals import *
 
 pygame.font.init()
@@ -92,8 +92,7 @@ def game_over(score):
                     quit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if Buttons[0].collidepoint(pygame.mouse.get_pos()):
-                    game()
-                    pause()
+                    main_menu()
                 if Buttons[1].collidepoint(pygame.mouse.get_pos()):
                     quit()
         for btn in Buttons:
@@ -119,7 +118,7 @@ def pause():
         pygame.display.update()
 
 #Aim Trainer code
-def game():
+def game(difficulty):
     MX = (CanvasW / 2)
     MY = (CanvasH / 2)
     score = 0
@@ -127,31 +126,20 @@ def game():
     pygame.time.set_timer(pygame.USEREVENT, 1000)
     pygame.mouse.set_visible(False)
     Targets = []
-    Targets.append((50, 200))
-    Targets.append((450, 200))
-    Targets.append((400, 366))
-    Targets.append((100, 400))
-    Targets.append((600, 500))
-    Targets.append((789, 250))
-    Targets.append((425, 600))
-    Targets.append((900, 400))
-    Targets.append((700, 300))
-    Targets.append((300, 650))
-    Targets.append((462, 690))
-    Targets.append((500, 500))
     Target_rect = []
-    Target_rect.append(pygame.Rect(50,200,50,50))
-    Target_rect.append(pygame.Rect(450,200,50,50))
-    Target_rect.append(pygame.Rect(400,366,50,50))
-    Target_rect.append(pygame.Rect(100,400,50,50))
-    Target_rect.append(pygame.Rect(600,500,50,50))
-    Target_rect.append(pygame.Rect(789,250,50,50))
-    Target_rect.append(pygame.Rect(425,600,50,50))
-    Target_rect.append(pygame.Rect(900,400,50,50))
-    Target_rect.append(pygame.Rect(700,300,50,50))
-    Target_rect.append(pygame.Rect(300,650,50,50))
-    Target_rect.append(pygame.Rect(462,690,50,50))
-    Target_rect.append(pygame.Rect(500,500,25,25))
+    if difficulty == "easy":
+        number_targets = 7
+    if difficulty == "normal":
+        number_targets = 14
+    if difficulty == "hard":
+
+        
+        number_targets = 21
+    for x in range(number_targets):
+        x = random.randrange(50, 950, 66)
+        y = random.randrange(150, 700, 66)
+        Targets.append((x, y))
+        Target_rect.append(pygame.Rect(x,y,50,50))
     while True:
         screen.fill(Black)
         for event in pygame.event.get():
@@ -180,7 +168,7 @@ def game():
         for t in Targets:
             screen.blit(Aim_Target, t)
         if len(Targets) == 0:
-            game_over(12)
+            game_over(number_targets)
         draw("Score: " + str(score), screen, 50, 50, Game_TXT, Red) 
         draw("Time: " + text, screen, 650, 50, Game_TXT, Red)
         screen.blit(Aim_Scope, (MX - 230, MY - 230))
@@ -195,7 +183,9 @@ def main_menu():
     while True:
         Buttons = []
         screen.fill(Black)
-        Buttons.append(pygame.Rect(350, 400, 240, 100))
+        Buttons.append(pygame.Rect(350, 250, 240, 100))
+        Buttons.append(pygame.Rect(275, 350, 240, 100))
+        Buttons.append(pygame.Rect(350, 450, 240, 100))        
         Buttons.append(pygame.Rect(350, 600, 240, 100))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -205,15 +195,23 @@ def main_menu():
                     quit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if Buttons[0].collidepoint(pygame.mouse.get_pos()):
-                    game()
+                    game("easy")
                     pause()
                 if Buttons[1].collidepoint(pygame.mouse.get_pos()):
+                    game("normal")
+                    pause()
+                if Buttons[2].collidepoint(pygame.mouse.get_pos()):
+                    game("hard")
+                    pause()
+                if Buttons[3].collidepoint(pygame.mouse.get_pos()):
                     quit()
         for btn in Buttons:
             pygame.draw.rect(screen, Black, btn)
-        draw("Aim Trainer", screen, 75, 150, Font_TITLE, color1)
-        draw("Start", screen, 350, 400, Font_TXT, color2)
-        draw("Exit", screen, 350, 600, Font_TXT, color2)
+        draw("Aim Trainer", screen, 75, 100, Font_TITLE, color1)
+        draw("Easy", screen, 350, 250, Font_TXT, color2)
+        draw("Normal", screen, 275, 350, Font_TXT, color2)
+        draw("Hard", screen, 350, 450, Font_TXT, color2)
+        draw("Exit", screen, 350, 600, Font_TXT, color1)
         Clock.tick(50)
         time += 1
         if time % 100 == 0:
