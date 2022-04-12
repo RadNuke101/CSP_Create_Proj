@@ -104,6 +104,7 @@ def game_over(score):
         draw("Exit", screen, 350, 600, Font_TXT, White)
         pygame.display.update()
 
+# Winner screen
 def winner():
     pygame.mouse.set_visible(True)
     while True:
