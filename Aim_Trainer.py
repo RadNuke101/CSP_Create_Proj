@@ -11,6 +11,7 @@
  
 #                                                                                                           #
  
+ 
 #                                                                                                           #
 #############################################################################################################
 
@@ -103,6 +104,32 @@ def game_over(score):
         draw("Exit", screen, 350, 600, Font_TXT, White)
         pygame.display.update()
 
+def winner():
+    pygame.mouse.set_visible(True)
+    while True:
+        Buttons = []
+        Buttons.append(pygame.Rect(350, 400, 240, 100))
+        Buttons.append(pygame.Rect(350, 600, 240, 100))
+        screen.fill(Black)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    quit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if Buttons[0].collidepoint(pygame.mouse.get_pos()):
+                    main_menu()
+                if Buttons[1].collidepoint(pygame.mouse.get_pos()):
+                    quit()
+        for btn in Buttons:
+            pygame.draw.rect(screen, Black, btn)
+        draw("WINNER WINNER", screen, 250, 150, Game_OVER_TXT, Red)
+        draw("CHICKEN DINNER", screen, 350, 250, Score_TXT, White)
+        draw("Retry", screen, 350, 400, Font_TXT, Red)
+        draw("Exit", screen, 350, 600, Font_TXT, White)
+        pygame.display.update()
+
 #Pause Game
 def pause():
     paused = True
@@ -167,7 +194,7 @@ def game(difficulty):
         for t in Targets:
             screen.blit(Aim_Target, t)
         if len(Targets) == 0:
-            game_over(number_targets)
+            winner()
         draw("Score: " + str(score), screen, 50, 50, Game_TXT, Red) 
         draw("Time: " + text, screen, 650, 50, Game_TXT, Red)
         screen.blit(Aim_Scope, (MX - 230, MY - 230))
