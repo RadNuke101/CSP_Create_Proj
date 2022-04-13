@@ -17,11 +17,11 @@
 #           - winner() : Screen pops up if user shoots down all the targets                                 #
 #           - pause() : Screen pops up to pause the game                                                    #
 #           - game() : Runs the Aim Trainer game                                                            #
-#           - main_menu() : Starting menu where user can select difficulty                                  #
+#           - main_menu() : Starting menu where user can select difficulty                                  # 
 #                                                                                                           #
+# Inputs: Button click, Space Bar                                                                           #
 #                                                                                                           #
-#                                                                                                           #
-#                                                                                                           #
+# Outputs: Difficulty, Exit, Shoot Target, Retry, Pause                                                     #
 #                                                                                                           #
 #                                                                                                           #
 #############################################################################################################
