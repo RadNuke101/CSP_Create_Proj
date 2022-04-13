@@ -1,17 +1,28 @@
 #############################################################################################################
-#                                                --2D AIM_TRAINER--                                         #
- 
-#                                             Author: Pranav Putta                                          #
- 
-#                                 Description: Practice your aim to improve gameplay                        #
- 
+#                                                --2D AIM TRAINER--                                         #
 #                                                                                                           #
- 
+# Author: Pranav Putta                                                                                      #
+# Teacher: Mr. Millard                                                                                      #
+# School: American High School                                                                              #
+# Class: AP Computer Science Principlse                                                                     #
 #                                                                                                           #
- 
+# Description: Practice your aim to improve gameplay in shooter games.                                      #
+#              This game also serves as a way to excercise your eyes to improve health.                     #
 #                                                                                                           #
- 
- 
+#                                                                                                           #
+# Functions:                                                                                                #
+#           - quit() : Close the game/program                                                               #
+#           - draw() : Display text in according font on the screen                                         #
+#           - game_over(): Screen pops up when time runs out                                                #
+#           - winner() : Screen pops up if user shoots down all the targets                                 #
+#           - pause() : Screen pops up to pause the game                                                    #
+#           - game() : Runs the Aim Trainer game                                                            #
+#           - main_menu() : Starting menu where user can select difficulty                                  #
+#                                                                                                           #
+#                                                                                                           #
+#                                                                                                           #
+#                                                                                                           #
+#                                                                                                           #
 #                                                                                                           #
 #############################################################################################################
 
