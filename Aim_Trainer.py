@@ -23,6 +23,10 @@
 #                                                                                                           #
 # Outputs: Difficulty, Exit, Shoot Target, Retry, Pause                                                     #
 #                                                                                                           #
+# Sources:                                                                                                  #
+#         - https://github.com/pzet123/aim-Trainer                                                          #
+#         - https://stackoverflow.com/questions/30720665/countdown-timer-in-pygame                          #
+#         - https://www.youtube.com/watch?v=sDL7P2Jhlh8                                                     #
 #                                                                                                           #
 #############################################################################################################
 
