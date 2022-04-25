@@ -141,9 +141,9 @@ def winner():
         for btn in Buttons:
             pygame.draw.rect(screen, Black, btn)
         draw("WINNER WINNER", screen, 250, 150, Game_OVER_TXT, Red)
-        draw("CHICKEN DINNER", screen, 350, 250, Score_TXT, White)
+        draw("CHICKEN DINNER", screen, 335, 250, Score_TXT, White)
         draw("Retry", screen, 350, 400, Font_TXT, Red)
-        draw("Exit", screen, 350, 600, Font_TXT, White)
+        draw("Exit", screen, 365, 600, Font_TXT, White)
         pygame.display.update()
 
 #Pause Game
