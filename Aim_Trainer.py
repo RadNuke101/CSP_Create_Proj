@@ -1,5 +1,5 @@
 #############################################################################################################
-#                                                --2D AIM TRAINER--                                         #
+#                                                --AIM TRAINER--                                            #
 #                                                                                                           #
 # Author: Pranav Putta                                                                                      #
 # Teacher: Mr. Millard                                                                                      #
@@ -67,11 +67,6 @@ pygame.display.set_icon(I)
 #Initialize Images
 T = pygame.image.load("Images/Target.png")
 Aim_Target = pygame.transform.scale(T, (50, 50))
-Small_Aim = pygame.transform.scale(T, (25, 25))
-A = pygame.image.load("Images/Play.png")
-Play_Button = pygame.transform.scale(A, (100,100))
-B = pygame.image.load("Images/Play_Again.jpg")
-Play_Again_Button = pygame.transform.scale(B, (100,100))
 Aim = pygame.image.load("Images/Aim.png")
 Aim_Scope = pygame.transform.scale(Aim, (500,500))
 
@@ -103,9 +98,6 @@ def game_over(score):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    quit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if Buttons[0].collidepoint(pygame.mouse.get_pos()):
                     main_menu()
@@ -130,9 +122,6 @@ def winner():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    quit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if Buttons[0].collidepoint(pygame.mouse.get_pos()):
                     main_menu()
@@ -148,16 +137,19 @@ def winner():
 
 #Pause Game
 def pause():
-    paused = True
-    while paused:
+    halt = True
+    while halt:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
             if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_q:
+                    quit()
                 if event.key == pygame.K_SPACE:
-                    paused = False
+                    halt = False
         screen.fill(White)
-        draw("Press Space to Resume", screen, 120, 350, Game_TXT, Red)
+        draw("Press Space to Resume", screen, 120, 250, Game_TXT, Red)
+        draw("Press Q to Exit", screen, 250, 450, Game_TXT, Red)
         pygame.display.update()
 
 #Aim Trainer code
@@ -180,7 +172,7 @@ def game(difficulty):
         x = random.randrange(50, 950, 66)
         y = random.randrange(150, 700, 66)
         Targets.append((x, y))
-        Target_rect.append(pygame.Rect(x,y,50,50))
+        Target_rect.append(pygame.Rect(x, y, 50, 50))
     while True:
         screen.fill(Black)
         for event in pygame.event.get():
@@ -232,9 +224,6 @@ def main_menu():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    quit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if Buttons[0].collidepoint(pygame.mouse.get_pos()):
                     game("easy")
