@@ -19,7 +19,7 @@
 #           - game() : Runs the Aim Trainer game                                                            #
 #           - main_menu() : Starting menu where user can select difficulty                                  # 
 #                                                                                                           #
-# Inputs: Button click, Space Bar                                                                           #
+# Inputs: Button click, Space Bar, Q key, R key                                                             #
 #                                                                                                           #
 # Outputs: Difficulty, Exit, Shoot Target, Retry, Pause                                                     #
 #                                                                                                           #
@@ -30,10 +30,11 @@
 #                                                                                                           #
 #############################################################################################################
 
+#Import modules into code
 import pygame, sys, random
 from pygame.locals import *
 
-pygame.font.init()
+#Initialize pygame modules
 pygame.init()
 
 #Initialize Canvas/Window
@@ -46,15 +47,13 @@ Black = (0,0,0)
 Red = (255,0,0)
 White = (255,255,255)
 
-
 #Initialize Fonts
 Font_TXT = pygame.font.Font("Fonts/Blazed.ttf", 75)
 Font_TITLE = pygame.font.Font("Fonts/Blazed.ttf", 100)
 Game_TXT = pygame.font.Font("Fonts/raidercrusader.ttf", 75)
 Pause_TXT = pygame.font.Font("Fonts/raidercrusader.ttf", 150)
-Game_OVER_TXT = pygame.font.Font("Fonts/raidercrusader.ttf", 75)
+Game_Over_TXT = pygame.font.Font("Fonts/raidercrusader.ttf", 75)
 Score_TXT = pygame.font.Font("Fonts/raidercrusader.ttf", 50)
-
 
 #Initialize Caption
 pygame.display.set_caption("Aim Trainer")
@@ -69,24 +68,19 @@ Aim_Target = pygame.transform.scale(T, (50, 50))
 Aim = pygame.image.load("Images/Aim.png")
 Aim_Scope = pygame.transform.scale(Aim, (500,500))
 
-
-#Initialize Time
-Clock = pygame.time.Clock()
-
 #Quit game
 def quit():
     pygame.quit()
     sys.exit()
 
-#Draw text on screen
-def draw(text, surface, x, y, font, color = Red):
-    textObject = font.render(text, 1, color)
-    textRect = textObject.get_rect()
-    textRect.topleft = (x,y)
-    surface.blit(textObject, textRect)
+#Display text on screen
+def draw(txt, surface, x, y, font, color):
+    txtObject = font.render(txt, 1, color)
+    txtRect = txtObject.get_rect()
+    txtRect.topleft = (x,y)
+    surface.blit(txtObject, txtRect)
 
-
-#Game over tab
+#Game over screen
 def game_over(score):
     pygame.mouse.set_visible(True)
     while True:
@@ -104,13 +98,13 @@ def game_over(score):
                     quit()
         for btn in Buttons:
             pygame.draw.rect(screen, Black, btn)
-        draw("GAME OVER", screen, 300, 150, Game_OVER_TXT, Red)
+        draw("GAME OVER", screen, 300, 150, Game_Over_TXT, Red)
         draw("Score:" + str(score), screen, 425, 250, Score_TXT, White)
         draw("Retry", screen, 350, 400, Font_TXT, Red)
         draw("Exit", screen, 350, 600, Font_TXT, White)
         pygame.display.update()
 
-# Winner screen
+#Winner screen
 def winner():
     pygame.mouse.set_visible(True)
     while True:
@@ -128,13 +122,13 @@ def winner():
                     quit()
         for btn in Buttons:
             pygame.draw.rect(screen, Black, btn)
-        draw("WINNER WINNER", screen, 250, 150, Game_OVER_TXT, Red)
+        draw("WINNER WINNER", screen, 250, 150, Game_Over_TXT, Red)
         draw("CHICKEN DINNER", screen, 335, 250, Score_TXT, White)
         draw("Retry", screen, 350, 400, Font_TXT, Red)
         draw("Exit", screen, 365, 600, Font_TXT, White)
         pygame.display.update()
 
-#Pause Game
+#Pause screen
 def pause():
     halt = True
     while halt:
@@ -155,7 +149,7 @@ def pause():
         draw("Press Q to Quit", screen, 200, 550, Game_TXT, Black)
         pygame.display.update()
 
-#Aim Trainer code
+#Aim Trainer game code
 def game(difficulty):
     MX = (CanvasW / 2)
     MY = (CanvasH / 2)
@@ -165,11 +159,11 @@ def game(difficulty):
     pygame.mouse.set_visible(False)
     Targets = []
     Target_rect = []
-    if difficulty == "easy":
+    if difficulty == "e":
         number_targets = 7
-    if difficulty == "normal":
+    if difficulty == "n":
         number_targets = 14
-    if difficulty == "hard":   
+    if difficulty == "h":   
         number_targets = 21
     for x in range(number_targets):
         x = random.randrange(50, 950, 66)
@@ -211,12 +205,8 @@ def game(difficulty):
         screen.blit(Aim_Scope, (MX - 230, MY - 230))
         pygame.display.update()
 
-
-#Main Menu - Exit, pause
+#Main Menu screen
 def main_menu():
-    color1 = White
-    color2 = Red
-    time = 0
     while True:
         Buttons = []
         screen.fill(Black)
@@ -229,39 +219,23 @@ def main_menu():
                 quit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if Buttons[0].collidepoint(pygame.mouse.get_pos()):
-                    game("easy")
+                    game("e")
                     pause()
                 if Buttons[1].collidepoint(pygame.mouse.get_pos()):
-                    game("normal")
+                    game("n")
                     pause()
                 if Buttons[2].collidepoint(pygame.mouse.get_pos()):
-                    game("hard")
+                    game("h")
                     pause()
                 if Buttons[3].collidepoint(pygame.mouse.get_pos()):
                     quit()
         for btn in Buttons:
             pygame.draw.rect(screen, Black, btn)
-        draw("Aim Trainer", screen, 75, 100, Font_TITLE, color1)
-        draw("Easy", screen, 350, 250, Font_TXT, color2)
-        draw("Normal", screen, 275, 350, Font_TXT, color2)
-        draw("Hard", screen, 350, 450, Font_TXT, color2)
-        draw("Exit", screen, 350, 600, Font_TXT, color1)
-        Clock.tick(50)
-        time += 1
-        if time % 100 == 0:
-            color1 = Red
-            color2 = White
-        elif time % 50 == 0:
-            color1 = White
-            color2 = Red
+        draw("Aim Trainer", screen, 75, 100, Font_TITLE, Red)
+        draw("Easy", screen, 350, 250, Font_TXT, White)
+        draw("Normal", screen, 275, 350, Font_TXT, White)
+        draw("Hard", screen, 350, 450, Font_TXT, White)
+        draw("Exit", screen, 350, 600, Font_TXT, Red)
         pygame.display.update()
 
 main_menu()
-
-
-    
-
-
-
-
-
