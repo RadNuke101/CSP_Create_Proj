@@ -1,7 +1,6 @@
 #############################################################################################################
 #                                                --AIM TRAINER--                                            #
 #                                                                                                           #
-# Author: Pranav Putta                                                                                      #
 # Teacher: Mr. Millard                                                                                      #
 # School: American High School                                                                              #
 # Class: AP Computer Science Principlse                                                                     #
@@ -214,6 +213,7 @@ def main_menu():
         Buttons.append(pygame.Rect(275, 350, 240, 100))
         Buttons.append(pygame.Rect(350, 450, 240, 100))        
         Buttons.append(pygame.Rect(350, 600, 240, 100))
+        -
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
