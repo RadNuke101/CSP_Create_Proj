@@ -44,15 +44,14 @@ screen = pygame.display.set_mode((CanvasW,CanvasH))
 #Initialize Colors
 Black = (0,0,0)
 Red = (255,0,0)
-Blue = (0,0,255)
 White = (255,255,255)
-Green = (0,255,0)
 
 
 #Initialize Fonts
 Font_TXT = pygame.font.Font("Fonts/Blazed.ttf", 75)
 Font_TITLE = pygame.font.Font("Fonts/Blazed.ttf", 100)
 Game_TXT = pygame.font.Font("Fonts/raidercrusader.ttf", 75)
+Pause_TXT = pygame.font.Font("Fonts/raidercrusader.ttf", 150)
 Game_OVER_TXT = pygame.font.Font("Fonts/raidercrusader.ttf", 75)
 Score_TXT = pygame.font.Font("Fonts/raidercrusader.ttf", 50)
 
@@ -145,11 +144,15 @@ def pause():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     quit()
+                if event.key == pygame.K_r:
+                    main_menu()
                 if event.key == pygame.K_SPACE:
                     halt = False
         screen.fill(White)
-        draw("Press Space to Resume", screen, 120, 250, Game_TXT, Red)
-        draw("Press Q to Exit", screen, 250, 450, Game_TXT, Red)
+        draw("Paused", screen, 250, 100, Pause_TXT, Red)
+        draw("Press Space to Resume", screen, 120, 350, Game_TXT, Black)
+        draw("Press R to Restart", screen, 175, 450, Game_TXT, Black)
+        draw("Press Q to Quit", screen, 200, 550, Game_TXT, Black)
         pygame.display.update()
 
 #Aim Trainer code
