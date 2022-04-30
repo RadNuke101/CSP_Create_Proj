@@ -11,16 +11,16 @@
 #                                                                                                           #
 # Functions:                                                                                                #
 #           - quit() : Close the game/program                                                               #
-#           - draw() : Display text in according font on the screen                                         #
+#           - draw() : Display text on the screen                                         #
 #           - game_over(): Screen pops up when time runs out                                                #
 #           - winner() : Screen pops up if user shoots down all the targets                                 #
 #           - pause() : Screen pops up to pause the game                                                    #
 #           - game() : Runs the Aim Trainer game                                                            #
 #           - main_menu() : Starting menu where user can select difficulty                                  # 
 #                                                                                                           #
-# Inputs: Button click, Space Bar, Q key, R key                                                             #
+# Inputs: Mouse click, Space Bar, Q key, R key                                                             #
 #                                                                                                           #
-# Outputs: Difficulty, Exit, Shoot Target, Retry, Pause                                                     #
+# Outputs: Difficulty, Exit, Score Increases, Retry, Pause                                                     #
 #                                                                                                           #
 # Sources:                                                                                                  #
 #         - https://github.com/pzet123/aim-Trainer                                                          #
