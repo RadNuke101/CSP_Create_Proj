@@ -73,11 +73,11 @@ def quit():
     sys.exit()
 
 #Display text on screen
-def draw(txt, surface, x, y, font, color):
+def draw(txt, x, y, font, color):
     txtObject = font.render(txt, 1, color)
     txtRect = txtObject.get_rect()
     txtRect.topleft = (x,y)
-    surface.blit(txtObject, txtRect)
+    screen.blit(txtObject, txtRect)
 
 #Game over screen
 def game_over(score):
@@ -97,10 +97,10 @@ def game_over(score):
                     quit()
         for btn in Buttons:
             pygame.draw.rect(screen, Black, btn)
-        draw("GAME OVER", screen, 300, 150, Game_Over_TXT, Red)
-        draw("Score:" + str(score), screen, 425, 250, Score_TXT, White)
-        draw("Retry", screen, 350, 400, Font_TXT, Red)
-        draw("Exit", screen, 350, 600, Font_TXT, White)
+        draw("GAME OVER", 300, 150, Game_Over_TXT, Red)
+        draw("Score:" + str(score), 425, 250, Score_TXT, White)
+        draw("Retry", 350, 400, Font_TXT, Red)
+        draw("Exit", 350, 600, Font_TXT, White)
         pygame.display.update()
 
 #Winner screen
@@ -121,10 +121,10 @@ def winner():
                     quit()
         for btn in Buttons:
             pygame.draw.rect(screen, Black, btn)
-        draw("WINNER WINNER", screen, 250, 150, Game_Over_TXT, Red)
-        draw("CHICKEN DINNER", screen, 335, 250, Score_TXT, White)
-        draw("Retry", screen, 350, 400, Font_TXT, Red)
-        draw("Exit", screen, 365, 600, Font_TXT, White)
+        draw("WINNER WINNER", 250, 150, Game_Over_TXT, Red)
+        draw("CHICKEN DINNER", 335, 250, Score_TXT, White)
+        draw("Retry", 350, 400, Font_TXT, Red)
+        draw("Exit", 365, 600, Font_TXT, White)
         pygame.display.update()
 
 #Pause screen
@@ -142,10 +142,10 @@ def pause():
                 if event.key == pygame.K_SPACE:
                     halt = False
         screen.fill(White)
-        draw("Paused", screen, 250, 100, Pause_TXT, Red)
-        draw("Press Space to Resume", screen, 120, 350, Game_TXT, Black)
-        draw("Press R to Restart", screen, 175, 450, Game_TXT, Black)
-        draw("Press Q to Quit", screen, 200, 550, Game_TXT, Black)
+        draw("Paused", 250, 100, Pause_TXT, Red)
+        draw("Press Space to Resume", 120, 350, Game_TXT, Black)
+        draw("Press R to Restart", 175, 450, Game_TXT, Black)
+        draw("Press Q to Quit", 200, 550, Game_TXT, Black)
         pygame.display.update()
 
 #Aim Trainer game code
@@ -199,8 +199,8 @@ def game(difficulty):
             screen.blit(Aim_Target, t)
         if len(Targets) == 0:
             winner()
-        draw("Score: " + str(score), screen, 50, 50, Game_TXT, Red) 
-        draw("Time: " + text, screen, 650, 50, Game_TXT, Red)
+        draw("Score: " + str(score), 50, 50, Game_TXT, Red) 
+        draw("Time: " + text, 650, 50, Game_TXT, Red)
         screen.blit(Aim_Scope, (MX - 230, MY - 230))
         pygame.display.update()
 
@@ -230,11 +230,11 @@ def main_menu():
                     quit()
         for btn in Buttons:
             pygame.draw.rect(screen, Black, btn)
-        draw("Aim Trainer", screen, 75, 100, Font_TITLE, Red)
-        draw("Easy", screen, 350, 250, Font_TXT, White)
-        draw("Normal", screen, 275, 350, Font_TXT, White)
-        draw("Hard", screen, 350, 450, Font_TXT, White)
-        draw("Exit", screen, 350, 600, Font_TXT, Red)
+        draw("Aim Trainer", 75, 100, Font_TITLE, Red)
+        draw("Easy", 350, 250, Font_TXT, White)
+        draw("Normal", 275, 350, Font_TXT, White)
+        draw("Hard", 350, 450, Font_TXT, White)
+        draw("Exit", 350, 600, Font_TXT, Red)
         pygame.display.update()
 
 main_menu()
