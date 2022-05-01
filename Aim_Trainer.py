@@ -11,21 +11,28 @@
 #                                                                                                           #
 # Functions:                                                                                                #
 #           - quit() : Close the game/program                                                               #
-#           - draw() : Display text on the screen                                         #
+#           - draw() : Display text on the screen                                                           #
 #           - game_over(): Screen pops up when time runs out                                                #
 #           - winner() : Screen pops up if user shoots down all the targets                                 #
 #           - pause() : Screen pops up to pause the game                                                    #
 #           - game() : Runs the Aim Trainer game                                                            #
 #           - main_menu() : Starting menu where user can select difficulty                                  # 
 #                                                                                                           #
-# Inputs: Mouse click, Space Bar, Q key, R key                                                             #
+# Inputs: Mouse click, Space Bar, Q key, R key                                                              #
 #                                                                                                           #
-# Outputs: Difficulty, Exit, Score Increases, Retry, Pause                                                     #
+# Outputs: Difficulty, Exit, Score Increases, Retry, Pause                                                  #
 #                                                                                                           #
-# Sources:                                                                                                  #
+# Code Sources (Inspiration):                                                                               #
 #         - https://github.com/pzet123/aim-Trainer                                                          #
 #         - https://stackoverflow.com/questions/30720665/countdown-timer-in-pygame                          #
-#         - https://www.youtube.com/watch?v=sDL7P2Jhlh8                                                     #
+#         - https://www.youtube.com/watch?v=sDL7P2Jhlh8                                                     # 
+#                                                                                                           #
+# Images Source:                                                                                            #
+#         - https://www.clipartmax.com/                                                                     #
+#                                                                                                           #
+# Fonts Source:                                                                                             #
+#          - https://www.fontsquirrel.com/                                                                  #
+#                                                                                                           #
 #                                                                                                           #
 #############################################################################################################
 
