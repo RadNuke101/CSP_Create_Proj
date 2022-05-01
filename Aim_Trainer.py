@@ -1,9 +1,5 @@
 #############################################################################################################
-#                                                --AIM TRAINER--                                            #
-#                                                                                                           #
-# Teacher: Mr. Millard                                                                                      #
-# School: American High School                                                                              #
-# Class: AP Computer Science Principles                                                                   #
+#                                                --AIM TRAINER--                                            #                                                                                                      #
 #                                                                                                           #
 # Description: Practice your aim to improve gameplay in shooter games.                                      #
 #              This game also serves as a way to excercise your eyes to improve health.                     #
